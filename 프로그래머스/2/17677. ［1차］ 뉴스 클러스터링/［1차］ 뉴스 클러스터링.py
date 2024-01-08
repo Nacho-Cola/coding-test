@@ -3,8 +3,8 @@ from collections import Counter
 def get_pair(string):
     pair = []
     for i in range(len(string)-1): 
-        if ord('A') <= ord(string[i]) and ord('Z') >=ord(string[i]):
-            if ord('A') <= ord(string[i+1]) and ord('Z') >=ord(string[i+1]):
+        if string[i].isalpha():
+            if string[i+1].isalpha():
                 pair.append(string[i]+string[i+1])
     return pair
 
