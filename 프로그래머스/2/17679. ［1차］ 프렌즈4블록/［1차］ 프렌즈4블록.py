@@ -7,7 +7,6 @@ def solution(m, n, board):
     x = [0, 0, 1, 1]
     y = [0, 1, 0, 1]
     
-
     while True:
         coor = []
         for ix in range(m-1):
@@ -37,8 +36,3 @@ def solution(m, n, board):
         board = list(map(list,zip(*temp)))
 
     return answer
-
- # CCBDE
- # AAADE
- # AAABE
- # CCBBF
