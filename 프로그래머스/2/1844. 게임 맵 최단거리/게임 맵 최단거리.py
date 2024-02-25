@@ -4,6 +4,7 @@ def solution(maps):
     dx = [-1,1,0,0]
     dy = [0,0,-1,1]
     queue = deque([(0,0)])
+
     while queue:
         x, y = queue.popleft()
         for i in range(4):
