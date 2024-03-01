@@ -1,21 +1,11 @@
 def solution(progresses, speeds):
-    answer = []  
-    queue = []  
-    
-    for i in range(len(progresses)):
-        days = (100 - progresses[i]) // speeds[i]
-        if (100 - progresses[i]) % speeds[i] != 0:
-            days += 1
-        queue.append(days)
-
-    while queue:
-        count = 1  
-        front = queue.pop(0)  
-
-        while queue and front >= queue[0]:
-            count += 1
-            queue.pop(0)
-
-        answer.append(count)
-
-    return answer
+    que = []
+    prev_p = 0
+    for p,s in zip(progresses, speeds):
+        print(prev_p)
+        if (not que) or (prev_p < int((100-p)/s+0.9)):
+            prev_p = int((100-p)/s+0.9)
+            que.append(1)
+        else:
+            que[-1] += 1
+    return que
