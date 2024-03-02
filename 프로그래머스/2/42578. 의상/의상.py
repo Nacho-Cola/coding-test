@@ -1,16 +1,13 @@
+
 def solution(clothes):
-    dic = {}
-    for ch in clothes:
-        if ch[1] in dic:
-            dic[ch[1]] += 1
-        else:
-            dic[ch[1]] = 1
-            
-    ls = dic.values()
-    answer = 0
-    sums = 0
-    for i in ls:
-        answer = (sums+1) * i
-        sums += answer
-        print(sums)
-    return sums
+    H = {}   
+    answer = 1
+    for _,c in clothes:
+        if c in H:
+            H[c] += 1
+        if c not in H:
+            H[c] = 2
+    for i in H.items():
+        answer *= i[1]
+        
+    return answer - 1
