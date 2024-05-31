@@ -5,5 +5,5 @@ def solution(lottos, win_nums):
     for i in lottos:
         if i in win_nums:
             point += 1
-    tar = {0:6,1:6,2:5,3:4,4:3,5:2,6:1}
-    return tar[cnt[0]+point], tar[point] if point else 6
+    tar = [6,6,5,4,3,2,1]
+    return tar[cnt[0]+point], tar[point]
