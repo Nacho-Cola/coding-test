@@ -26,3 +26,5 @@ def solution(arr):
     get_qd(len(arr), arr)
 
     return answer_arr
+
+# 36분
