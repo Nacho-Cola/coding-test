@@ -3,7 +3,7 @@ def solution(n):
 
     answer = [[0 for j in range(1, i+1)] for i in range(1, n+1)]
     
-    x, y = -1, 0  
+    x, y = -1, 0  #방향
     num = 1
 
     for i in range(n):
