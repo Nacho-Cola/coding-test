@@ -3,7 +3,7 @@ def solution(a):
     
     answer = 0
     arr = Counter(a)
-    for key in arr.keys():
+    for key in arr:
         if arr[key] <= answer: # 최대 값보다 작은 값은 스킵
             continue
         i = 0
