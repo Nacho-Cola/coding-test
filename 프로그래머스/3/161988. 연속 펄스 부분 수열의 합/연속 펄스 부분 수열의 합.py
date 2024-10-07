@@ -6,4 +6,4 @@ def solution(sequence):
     for i in range(len(sequence)-1):
         seq[i+1] += seq[i]
         
-    return max(abs(min(seq)),max(seq),max(seq)-min(seq))
+    return max( abs(min(seq)), abs(max(seq)) ,max(seq)-min(seq))
