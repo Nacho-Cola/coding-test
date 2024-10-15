@@ -15,4 +15,4 @@ def solution(strs, t):
 
     if dp[-1] == float('inf'):
         return -1
-    return dp[-1]
+    return dp[-1] 
