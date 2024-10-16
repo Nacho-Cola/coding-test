@@ -1,6 +1,9 @@
 from collections import Counter
 def solution(participant, completion):
-    participant, completion = Counter(participant), Counter(completion)
-    for i in participant:
-        if participant[i] != completion[i]:
-            return i
+    participant = Counter(participant)
+    completion = Counter(completion)
+    for p in list(participant):
+        if participant[p] != completion[p]:
+            return p
+
+        
