@@ -1,15 +1,21 @@
-
+from collections import defaultdict
 def solution(msg):
+    dic = { alpha:i for alpha, i in zip(list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),range(1,27))}
+    msg = list(msg)
     answer = []
-    dic = {chr(i) : i-64 for i in range(65,91)}
-    start, end = 0, 1
-    msg = list(msg) + ["0"]
-    print(msg)
-    while end < len(msg):
-        while ''.join(msg[start:end]) in dic:
-            end+=1
-        temp = ''.join(msg[start:end])
-        dic[temp] = len(dic) + 1
-        answer.append(dic[temp[:-1]])
-        start , end = end - 1, end
+    idx = 27
+    p1 = 0
+    p2 = 1
+    while p2 != len(msg)+1:
+        if ''.join(msg[p1:p2]) in dic:
+            p2+=1
+        else:
+            dic[''.join(msg[p1:p2])] = idx
+            answer.append(dic[''.join(msg[p1:p2-1])])
+            idx += 1
+            p1 = p2-1
+            
+    answer.append(dic[''.join(msg[p1:p2-1])])
+        
+    
     return answer
