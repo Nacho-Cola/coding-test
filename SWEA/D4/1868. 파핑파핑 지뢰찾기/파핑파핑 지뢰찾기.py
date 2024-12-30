@@ -1,49 +1,83 @@
-T = int(input())
+import java.util.Scanner;
+import java.util.Stack;
 
-for test_case in range(1, T + 1):
-    result = 0 
-    N = int(input())
-    mine_map = []
-    directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
-    
-    for _ in range(N):
-        mine_map.append(list(input()))
+class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt(); 
 
-    for n in range(N):
-        for m in range(N):
-            if mine_map[n][m] == '.':
-                mine_count = 0
-                for dx, dy in directions:
-                    nx, ny = n + dx, m + dy
-                    if 0 <= nx < N and 0 <= ny < N and mine_map[nx][ny] == '*':
-                        mine_count += 1
-                mine_map[n][m] = str(mine_count)
+        for (int test_case = 1; test_case <= T; test_case++) {
+            int N = sc.nextInt();
+            char[][] mineMap = new char[N][N];
+            boolean[][] visited = new boolean[N][N];
+            int result = 0;
 
+            int[] dx = {-1, -1, -1, 0, 0, 1, 1, 1};
+            int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
 
-    visited = [[False] * N for _ in range(N)]
+            for (int i = 0; i < N; i++) {
+                String row = sc.next();
+                mineMap[i] = row.toCharArray();
+            }
 
-    def dfs(x, y):
-        stack = [(x, y)]
-        while stack:
-            cx, cy = stack.pop()
-            if visited[cx][cy]:
-                continue
-            visited[cx][cy] = True
-            if mine_map[cx][cy] == '0':  
-                for dx, dy in directions:
-                    nx, ny = cx + dx, cy + dy
-                    if 0 <= nx < N and 0 <= ny < N and not visited[nx][ny] and mine_map[nx][ny] != '*':
-                        stack.append((nx, ny))
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (mineMap[i][j] == '.') {
+                        int mineCount = 0;
+                        for (int k = 0; k < 8; k++) {
+                            int nx = i + dx[k];
+                            int ny = j + dy[k];
+                            if (nx >= 0 && nx < N && ny >= 0 && ny < N && mineMap[nx][ny] == '*') {
+                                mineCount++;
+                            }
+                        }
+                        mineMap[i][j] = (char) (mineCount + '0');
+                    }
+                }
+            }
 
-    for n in range(N):
-        for m in range(N):
-            if mine_map[n][m] == '0' and not visited[n][m]:
-                dfs(n, m)  
-                result += 1
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (mineMap[i][j] == '0' && !visited[i][j]) {
+                        dfs(mineMap, visited, i, j, N, dx, dy);
+                        result++;
+                    }
+                }
+            }
 
-    for n in range(N):
-        for m in range(N):
-            if mine_map[n][m] != '*' and not visited[n][m]:
-                result += 1
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (mineMap[i][j] != '*' && !visited[i][j]) {
+                        result++;
+                    }
+                }
+            }
 
-    print(f"#{test_case} {result}")
+            System.out.println("#" + test_case + " " + result);
+        }
+    }
+
+    private static void dfs(char[][] mineMap, boolean[][] visited, int x, int y, int N, int[] dx, int[] dy) {
+        Stack<int[]> stack = new Stack<>();
+        stack.push(new int[]{x, y});
+
+        while (!stack.isEmpty()) {
+            int[] current = stack.pop();
+            int cx = current[0];
+            int cy = current[1];
+
+            if (visited[cx][cy]) continue;
+            visited[cx][cy] = true;
+
+            if (mineMap[cx][cy] == '0') {
+                for (int k = 0; k < 8; k++) {
+                    int nx = cx + dx[k];
+                    int ny = cy + dy[k];
+                    if (nx >= 0 && nx < N && ny >= 0 && ny < N && !visited[nx][ny] && mineMap[nx][ny] != '*') {
+                        stack.push(new int[]{nx, ny});
+                    }
+                }
+            }
+        }
+    }
+}
