@@ -14,11 +14,9 @@ for c,i in S.items():
         even += 1
         even_w = c
         
-
+result = ''
 for c in sorted(S):
     for _ in range(S[c]//2):
-        print(c,end='')
-print(even_w, end='')
-for c in sorted(S)[::-1]:
-    for _ in range(S[c]//2):
-        print(c,end='')
+        result += c
+result =  result + even_w + result[::-1]
+print(result)
